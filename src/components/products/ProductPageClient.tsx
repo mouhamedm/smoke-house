@@ -1,0 +1,232 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { products } from "@/data/products";
+import { notFound } from "next/navigation";
+import { Minus, Plus, ChevronRight } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default function ProductPageClient({ slug }: { slug: string }) {
+  const product = products.find((p) => p.slug === slug);
+
+  const [currentImage, setCurrentImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+
+  const heroRef = useRef<HTMLDivElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!product) return;
+
+    gsap.fromTo(
+      heroRef.current,
+      { x: -40, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1.2, ease: "power3.out", delay: 0.2 }
+    );
+    gsap.fromTo(
+      infoRef.current?.children || [],
+      { x: 40, opacity: 0 },
+      { x: 0, opacity: 1, stagger: 0.1, duration: 1, ease: "power3.out", delay: 0.3 }
+    );
+  }, [product]);
+
+  if (!product) {
+    notFound();
+    return null;
+  }
+
+  const specLabels: Record<string, string> = {
+    materials: "Matériaux",
+    dimensions: "Dimensions",
+    weight: "Poids",
+    origin: "Origine",
+  };
+
+  const stockStatus = () => {
+    if (product.stock === 0) return { label: "Rupture de stock", color: "text-brand-red" };
+    if (product.stock <= 5) return { label: `Plus que ${product.stock} disponibles`, color: "text-amber-400" };
+    return { label: `${product.stock} disponibles`, color: "text-green-500/70" };
+  };
+
+  const { label: stockLabel, color: stockColor } = stockStatus();
+
+  return (
+    <div className="min-h-screen bg-brand-black">
+
+      {/* Breadcrumb */}
+      <div className="container mx-auto px-6 md:px-12 pt-32 pb-8">
+        <div className="flex items-center gap-2 text-brand-lightgray text-xs uppercase tracking-widest">
+          <Link href="/" className="hover:text-brand-white transition-colors">Accueil</Link>
+          <ChevronRight className="w-3 h-3" />
+          <Link href="/shop" className="hover:text-brand-white transition-colors">Boutique</Link>
+          <ChevronRight className="w-3 h-3" />
+          <span className="text-brand-white">{product.name}</span>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-6 md:px-12 pb-24 flex flex-col lg:flex-row gap-12 lg:gap-20">
+
+        {/* Gallery */}
+        <div ref={heroRef} className="w-full lg:w-3/5 flex flex-col gap-4">
+          {/* Main Image */}
+          <div className="relative aspect-[4/5] bg-brand-charcoal overflow-hidden">
+            <Image
+              src={product.images[currentImage]}
+              alt={`${product.name} — vue ${currentImage + 1}`}
+              fill
+              priority
+              className="object-cover transition-opacity duration-500"
+            />
+            {product.featured && (
+              <div className="absolute top-6 left-6 bg-brand-white text-brand-black text-[10px] uppercase tracking-widest px-3 py-1.5 font-semibold">
+                Signature
+              </div>
+            )}
+          </div>
+
+          {/* Thumbnails */}
+          {product.images.length > 1 && (
+            <div className="grid grid-cols-4 gap-3">
+              {product.images.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentImage(idx)}
+                  className={`relative aspect-square overflow-hidden transition-all duration-200 ${
+                    currentImage === idx ? "ring-1 ring-brand-white" : "opacity-50 hover:opacity-80"
+                  }`}
+                >
+                  <Image src={img} alt={`Miniature ${idx + 1}`} fill className="object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Info (Sticky) */}
+        <div className="w-full lg:w-2/5">
+          <div ref={infoRef} className="sticky top-28 flex flex-col gap-6">
+
+            {/* Category & Name */}
+            <div>
+              <span className="text-brand-lightgray text-xs uppercase tracking-[0.3em] font-semibold block mb-3">
+                {product.category}
+              </span>
+              <h1 className="text-4xl md:text-5xl font-serif text-brand-white leading-tight mb-4">
+                {product.name}
+              </h1>
+              {product.rating && (
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <span key={i} className={`text-sm ${i < Math.round(product.rating!) ? "text-brand-white" : "text-brand-white/20"}`}>★</span>
+                    ))}
+                  </div>
+                  <span className="text-brand-lightgray text-xs">({product.rating} / 5)</span>
+                </div>
+              )}
+            </div>
+
+            {/* Price */}
+            <div className="py-4 border-y border-brand-white/10">
+              <span className="text-3xl text-brand-white font-serif">{product.price.toFixed(2)} €</span>
+              <p className="text-brand-lightgray text-sm mt-1">TVA incluse · Livraison à partir de 15 €</p>
+            </div>
+
+            {/* Description */}
+            <p className="text-brand-lightgray leading-relaxed">{product.description}</p>
+
+            {/* Stock */}
+            <p className={`text-sm font-medium ${stockColor}`}>● {stockLabel}</p>
+
+            {/* Quantity & Actions */}
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center border border-brand-white/20 h-12">
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="w-12 h-full flex items-center justify-center text-brand-lightgray hover:text-brand-white transition-colors"
+                  >
+                    <Minus className="w-4 h-4" />
+                  </button>
+                  <span className="w-10 text-center text-brand-white">{quantity}</span>
+                  <button
+                    onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                    className="w-12 h-full flex items-center justify-center text-brand-lightgray hover:text-brand-white transition-colors"
+                    disabled={product.stock === 0}
+                  >
+                    <Plus className="w-4 h-4" />
+                  </button>
+                </div>
+                <span className="text-brand-lightgray text-sm">
+                  {(product.price * quantity).toFixed(2)} € au total
+                </span>
+              </div>
+
+              <button
+                disabled={product.stock === 0}
+                className="w-full bg-brand-white text-brand-black uppercase tracking-widest text-sm font-semibold py-4 hover:bg-brand-offwhite transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                Ajouter au panier
+              </button>
+
+              <button
+                disabled={product.stock === 0}
+                className="w-full bg-transparent border border-brand-white text-brand-white uppercase tracking-widest text-sm font-semibold py-4 hover:bg-brand-white hover:text-brand-black transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                Acheter maintenant
+              </button>
+            </div>
+
+            {/* Specifications */}
+            {Object.keys(product.specifications).length > 0 && (
+              <div className="pt-6 border-t border-brand-white/10">
+                <h3 className="text-xs uppercase tracking-widest font-semibold text-brand-white mb-4">
+                  Détails du produit
+                </h3>
+                <div className="flex flex-col gap-3">
+                  {Object.entries(product.specifications).map(([key, val]) => (
+                    <div key={key} className="flex justify-between border-b border-brand-white/5 pb-2.5 text-sm">
+                      <span className="text-brand-lightgray">{specLabels[key] ?? key}</span>
+                      <span className="text-brand-white text-right w-2/3">{val}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+          </div>
+        </div>
+      </div>
+
+      {/* Related products teaser */}
+      <div className="border-t border-brand-white/10 py-16">
+        <div className="container mx-auto px-6 md:px-12">
+          <h2 className="text-2xl font-serif text-brand-white mb-8">Vous aimerez aussi</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {products
+              .filter((p) => p.id !== product.id && p.category === product.category)
+              .slice(0, 4)
+              .map((p) => (
+                <Link key={p.id} href={`/product/${p.slug}`} className="group flex flex-col gap-3">
+                  <div className="relative aspect-square bg-brand-charcoal overflow-hidden">
+                    <Image src={p.images[0]} alt={p.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                  <div>
+                    <p className="text-brand-white font-serif group-hover:text-brand-lightgray transition-colors">{p.name}</p>
+                    <p className="text-brand-lightgray text-sm">{p.price.toFixed(2)} €</p>
+                  </div>
+                </Link>
+              ))}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}
