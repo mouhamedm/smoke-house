@@ -16,12 +16,12 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Smoking House - L'expérience chicha premium",
+  title: "Smoke House - L'expérience chicha premium",
   description: "Découvrez notre collection premium de chichas, saveurs et accessoires. L'art de fumer autrement.",
   openGraph: {
-    title: "Smoking House - L'expérience chicha premium",
+    title: "Smoke House - L'expérience chicha premium",
     description: "Découvrez notre collection premium de chichas, saveurs et accessoires. L'art de fumer autrement.",
-    siteName: "Smoking House",
+    siteName: "Smoke House",
   },
 };
 

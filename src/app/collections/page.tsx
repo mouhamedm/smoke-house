@@ -119,7 +119,7 @@ export default function CollectionsPage() {
             Découvrez toute la boutique
           </h2>
           <p className="text-brand-lightgray text-lg max-w-xl">
-            Explorez les 12 produits qui composent l'univers Smoking House.
+            Explorez les 12 produits qui composent l'univers Smoke House.
           </p>
           <Link
             href="/shop"

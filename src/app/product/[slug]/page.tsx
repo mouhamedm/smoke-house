@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const product = products.find((p) => p.slug === slug);
   if (!product) return { title: "Produit non trouvé" };
   return {
-    title: `${product.name} | Smoking House`,
+    title: `${product.name} | Smoke House`,
     description: product.shortDescription,
   };
 }

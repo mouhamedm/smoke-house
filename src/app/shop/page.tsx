@@ -17,12 +17,24 @@ const CATEGORIES = [
   { label: "CHARBON", value: "charcoal" },
 ];
 
+const CATEGORY_ALIASES: Record<string, string> = {
+  chichas: "hookahs",
+  saveurs: "flavors",
+  accessoires: "accessories",
+  charbon: "charcoal",
+};
+
+function resolveCategory(param: string | null) {
+  if (!param) return "all";
+  return CATEGORY_ALIASES[param] ?? param;
+}
+
 function ShopContent() {
   const searchParams = useSearchParams();
   const collectionParam = searchParams.get("collection");
-  const categoryParam = searchParams.get("category");
+  const categoryParam = resolveCategory(searchParams.get("category"));
 
-  const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam || "all");
+  const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam);
   const [selectedCollection, setSelectedCollection] = useState<string | null>(collectionParam);
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -31,7 +43,7 @@ function ShopContent() {
   // Sync state if URL params change
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (categoryParam) setSelectedCategory(categoryParam);
+    setSelectedCategory(categoryParam);
     if (collectionParam) setSelectedCollection(collectionParam);
   }, [categoryParam, collectionParam]);
 
@@ -76,7 +88,7 @@ function ShopContent() {
           <div className="w-[500px] h-[200px] bg-brand-red/10 rounded-full blur-[100px]" />
         </div>
         <span className="relative text-brand-lightgray uppercase tracking-[0.4em] text-xs font-semibold mb-4">
-          La sélection Smoking House
+          La sélection Smoke House
         </span>
         <h1 className="relative text-4xl md:text-6xl lg:text-7xl font-serif text-brand-white">
           {activeCollectionObj ? activeCollectionObj.name : "Boutique"}

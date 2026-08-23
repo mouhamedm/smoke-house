@@ -37,7 +37,7 @@ export function Footer() {
         {/* Huge Logo Signature */}
         <div className="w-full mb-20 overflow-hidden flex justify-center">
           <h2 className="text-[12vw] md:text-[8vw] leading-none font-serif text-brand-white opacity-10 whitespace-nowrap">
-            SMOKING HOUSE
+            SMOKE HOUSE
           </h2>
         </div>
 
@@ -71,7 +71,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="w-full text-center border-t border-brand-white/10 pt-8">
           <p className="text-brand-lightgray text-sm tracking-widest">
-            © 2026 SMOKING HOUSE. TOUS DROITS RÉSERVÉS.
+            © {new Date().getFullYear()} SMOKE HOUSE. TOUS DROITS RÉSERVÉS.
           </p>
         </div>
       </div>

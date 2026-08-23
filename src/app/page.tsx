@@ -69,7 +69,10 @@ export default function Home() {
 
   }, []);
 
-  const featuredProducts = products.filter(p => p.featured).slice(0, 4);
+  const featuredProducts = [
+    ...products.filter((p) => p.category === "hookahs").slice(0, 6),
+    ...products.filter((p) => p.category === "charcoal").slice(0, 2),
+  ];
   const mainCollection = collections[0];
 
   return (
@@ -83,13 +86,20 @@ export default function Home() {
             ref={categoriesRef}
             className="flex overflow-x-auto no-scrollbar gap-8 md:justify-center border-b border-brand-white/10 pb-6"
           >
-            {["TOUT", "CHICHAS", "SAVEURS", "ACCESSOIRES", "CHARBON", "COLLECTIONS"].map((cat, i) => (
+            {[
+              { label: "TOUT", href: "/shop" },
+              { label: "CHICHAS", href: "/shop?category=hookahs" },
+              { label: "SAVEURS", href: "/shop?category=flavors" },
+              { label: "ACCESSOIRES", href: "/shop?category=accessories" },
+              { label: "CHARBON", href: "/shop?category=charcoal" },
+              { label: "COLLECTIONS", href: "/collections" },
+            ].map((cat, i) => (
               <Link 
-                key={cat} 
-                href={cat === "TOUT" ? "/shop" : `/shop?category=${cat.toLowerCase()}`}
+                key={cat.label} 
+                href={cat.href}
                 className={`text-sm tracking-widest font-semibold whitespace-nowrap transition-colors ${i === 0 ? "text-brand-white" : "text-brand-lightgray hover:text-brand-white"}`}
               >
-                {cat}
+                {cat.label}
               </Link>
             ))}
           </div>

@@ -60,7 +60,7 @@ export default function AboutPage() {
           <span className="italic font-light">élevé au rang d'excellence.</span>
         </h1>
         <p className="relative text-brand-lightgray text-lg md:text-xl leading-relaxed max-w-2xl">
-          Fondée sur la conviction qu'une tradition ancestrale mérite un écrin contemporain, Smoking House redéfinit les standards de l'industrie.
+          Fondée sur la conviction qu'une tradition ancestrale mérite un écrin contemporain, Smoke House redéfinit les standards de l'industrie.
         </p>
         {/* Scroll indicator */}
         <div className="absolute bottom-12 flex flex-col items-center gap-2">
@@ -107,7 +107,7 @@ export default function AboutPage() {
             <h2 className="text-3xl md:text-5xl font-serif text-brand-white leading-tight">Notre Vision</h2>
             <div className="w-12 h-[1px] bg-brand-white/30" />
             <p className="text-brand-lightgray leading-relaxed text-lg">
-              Nous avons observé un marché saturé de produits jetables et d'esthétiques criardes. Smoking House est née de la volonté d'offrir une alternative radicale : des matériaux nobles comme l'aluminium aérospatial, le titane et le verre borosilicate, associés à un design minimaliste et ténébreux.
+              Nous avons observé un marché saturé de produits jetables et d'esthétiques criardes. Smoke House est née de la volonté d'offrir une alternative radicale : des matériaux nobles comme l'aluminium aérospatial, le titane et le verre borosilicate, associés à un design minimaliste et ténébreux.
             </p>
             <p className="text-brand-lightgray leading-relaxed">
               Chaque détail est pensé pour sublimer l'expérience. Du tirage fluide et silencieux à l'équilibre parfait de nos manches de tuyaux, nous ne laissons rien au hasard.
@@ -158,7 +158,7 @@ export default function AboutPage() {
             <h2 className="text-3xl md:text-5xl font-serif text-brand-white leading-tight">Une Expérience<br />Inégalée</h2>
             <div className="w-12 h-[1px] bg-brand-white/30" />
             <p className="text-brand-lightgray leading-relaxed text-lg">
-              Au-delà du produit, Smoking House propose une véritable culture. Nos saveurs sont élaborées par des experts en mixologie pour offrir des profils aromatiques complexes et persistants.
+              Au-delà du produit, Smoke House propose une véritable culture. Nos saveurs sont élaborées par des experts en mixologie pour offrir des profils aromatiques complexes et persistants.
             </p>
             <p className="text-brand-lightgray leading-relaxed">
               Chaque session devient un rituel, une pause dans le temps. C'est cette philosophie du soin, du luxe discret et de la précision que nous insufflons dans chacun de nos produits.
