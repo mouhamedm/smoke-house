@@ -10,11 +10,22 @@ export function CustomCursor() {
   const mousePos = useRef({ x: -100, y: -100 });
   const ringPos = useRef({ x: -100, y: -100 });
   const rafRef = useRef<number | null>(null);
+  const isTouch = useRef(false);
 
   useEffect(() => {
+    // Check pointer type — if touch only, hide elements and stop
+    isTouch.current = !window.matchMedia("(pointer: fine)").matches;
+
     const dot = cursorDotRef.current;
     const ring = cursorRingRef.current;
     if (!dot || !ring) return;
+
+    // Hide on touch devices via DOM directly (no setState)
+    if (isTouch.current) {
+      dot.style.display = "none";
+      ring.style.display = "none";
+      return;
+    }
 
     const onMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
@@ -23,31 +34,21 @@ export function CustomCursor() {
 
     const onMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.closest("a") || target.closest("button")) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
+      setIsHovering(!!(target.closest("a") || target.closest("button")));
     };
 
     const onMouseLeave = () => setIsVisible(false);
     const onMouseEnter = () => setIsVisible(true);
 
-    // Smooth ring lag animation using RAF
     const animate = () => {
       if (!dot || !ring) return;
-
-      // Dot follows instantly
       dot.style.left = `${mousePos.current.x}px`;
       dot.style.top = `${mousePos.current.y}px`;
-
-      // Ring lags behind with lerp
       const lerp = 0.12;
       ringPos.current.x += (mousePos.current.x - ringPos.current.x) * lerp;
       ringPos.current.y += (mousePos.current.y - ringPos.current.y) * lerp;
       ring.style.left = `${ringPos.current.x}px`;
       ring.style.top = `${ringPos.current.y}px`;
-
       rafRef.current = requestAnimationFrame(animate);
     };
 
@@ -93,19 +94,14 @@ export function CustomCursor() {
           position: "fixed",
           width: isHovering ? "64px" : "40px",
           height: isHovering ? "64px" : "40px",
-          border: "none",
           backgroundColor: "white",
           borderRadius: "50%",
           pointerEvents: "none",
           zIndex: 99998,
           transform: "translate(-50%, -50%)",
           opacity: isVisible ? 1 : 0,
-          transition:
-            "width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border 0.3s ease, opacity 0.3s ease",
+          transition: "width 0.3s ease, height 0.3s ease, opacity 0.3s ease",
           mixBlendMode: "difference",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
         }}
       />
     </>

@@ -51,7 +51,7 @@ export function Navbar() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // Initialize state
-    
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -60,7 +60,9 @@ export function Navbar() {
       ref={navbarRef}
       className={clsx(
         "fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-5xl h-16 rounded-full z-50 flex items-center px-6 md:px-10 transition-colors duration-300",
-        isScrolled || pathname !== "/" ? "bg-brand-black shadow-2xl" : "bg-transparent"
+        isScrolled || pathname !== "/"
+          ? "bg-brand-black shadow-2xl"
+          : "bg-transparent",
       )}
     >
       {/* Absolute Centered Logo (Overflowing) */}
@@ -68,12 +70,12 @@ export function Navbar() {
         href="/"
         className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-50 transition-transform hover:scale-105"
       >
-        <Image 
-          src="/images/smoke-house-logo-v2.png" 
-          alt="Smoke House" 
-          width={90} 
-          height={90} 
-          className="object-cover rounded-full shadow-xl bg-brand-black"
+        <Image
+          src="/images/smoke-house-logo-v2.png"
+          alt="Smoke House"
+          width={90}
+          height={90}
+          className="w-[70px] h-[70px] md:w-[90px] md:h-[90px] object-cover rounded-full shadow-xl bg-brand-black"
           priority
         />
       </Link>
@@ -134,7 +136,7 @@ export function Navbar() {
           >
             <ShoppingBag className="w-5 h-5" />
           </Link>
-          
+
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-brand-white z-50 relative"
