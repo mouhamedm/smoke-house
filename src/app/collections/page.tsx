@@ -69,7 +69,7 @@ export default function CollectionsPage() {
             className={`flex flex-col ${idx % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-12 md:gap-24`}
           >
             {/* Image */}
-            <div className="w-full md:w-3/5 relative aspect-[4/3] overflow-hidden group">
+            <div className="w-full md:w-3/5 relative aspect-[2/3] overflow-hidden group">
               <Image
                 src={collection.image}
                 alt={collection.name}

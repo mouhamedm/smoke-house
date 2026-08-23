@@ -106,7 +106,7 @@ export function Hero() {
         style={{ transformStyle: "preserve-3d" }}
       >
         <Image
-          src="/images/hero/hero-hookah.png"
+          src="/images/hero/hero-hookah-v2.png"
           alt="Premium Smoking House Hookah"
           fill
           priority

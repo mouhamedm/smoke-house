@@ -9,6 +9,7 @@ export interface Product {
   stock: number;
   images: string[];
   specifications: {
+    brand?: string;
     materials?: string;
     dimensions?: string;
     weight?: string;
