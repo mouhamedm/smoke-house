@@ -33,17 +33,17 @@ export function Hero() {
           stagger: 0.08,
           ease: "power2.out",
         },
-        0.2
+        0.2,
       )
         .to(
           lineRef.current,
           { scaleX: 1, duration: 1, ease: "power3.inOut" },
-          "-=1.0"
+          "-=1.0",
         )
         .to(
           metaItems,
           { y: 0, opacity: 1, duration: 0.95, stagger: 0.14 },
-          "-=0.5"
+          "-=0.5",
         );
     }, section);
 
@@ -53,11 +53,11 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-screen overflow-hidden bg-brand-black"
+      className="relative w-full h-[60vh] lg:h-screen overflow-hidden bg-brand-black"
     >
       <video
         className="absolute inset-0 w-full h-full object-cover opacity-60"
-        src="/videos/hero_video.mp4"
+        src="/videos/hero_video_03.mp4"
         autoPlay
         muted
         loop

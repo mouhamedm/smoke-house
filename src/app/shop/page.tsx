@@ -34,8 +34,11 @@ function ShopContent() {
   const collectionParam = searchParams.get("collection");
   const categoryParam = resolveCategory(searchParams.get("category"));
 
-  const [selectedCategory, setSelectedCategory] = useState<string>(categoryParam);
-  const [selectedCollection, setSelectedCollection] = useState<string | null>(collectionParam);
+  const [selectedCategory, setSelectedCategory] =
+    useState<string>(categoryParam);
+  const [selectedCollection, setSelectedCollection] = useState<string | null>(
+    collectionParam,
+  );
 
   const heroRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -52,7 +55,14 @@ function ShopContent() {
     gsap.fromTo(
       heroRef.current?.children || [],
       { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, stagger: 0.15, duration: 1, ease: "power3.out", delay: 0.2 }
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.15,
+        duration: 1,
+        ease: "power3.out",
+        delay: 0.2,
+      },
     );
   }, []);
 
@@ -64,16 +74,20 @@ function ShopContent() {
       gsap.fromTo(
         children,
         { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.05, duration: 0.6, ease: "power3.out" }
+        { y: 0, opacity: 1, stagger: 0.05, duration: 0.6, ease: "power3.out" },
       );
     }
   }, [selectedCategory, selectedCollection]);
 
-  const activeCollectionObj = collections.find((c) => c.slug === selectedCollection);
+  const activeCollectionObj = collections.find(
+    (c) => c.slug === selectedCollection,
+  );
 
   const filteredProducts = products.filter((product) => {
-    const matchesCategory = selectedCategory === "all" || product.category === selectedCategory;
-    const matchesCollection = !selectedCollection || product.collection === selectedCollection;
+    const matchesCategory =
+      selectedCategory === "all" || product.category === selectedCategory;
+    const matchesCollection =
+      !selectedCollection || product.collection === selectedCollection;
     return matchesCategory && matchesCollection;
   });
 
@@ -82,7 +96,7 @@ function ShopContent() {
       {/* Hero */}
       <div
         ref={heroRef}
-        className="relative h-[45vh] flex flex-col items-center justify-center text-center px-6 overflow-hidden border-b border-brand-white/10"
+        className="relative h-[45vh] flex flex-col items-center justify-center text-center px-6 pt-28 overflow-hidden border-b border-brand-white/10"
       >
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-[500px] h-[200px] bg-brand-red/10 rounded-full blur-[100px]" />
@@ -133,7 +147,8 @@ function ShopContent() {
         {/* Count info */}
         <div className="flex justify-between items-center mb-8">
           <p className="text-brand-lightgray text-sm">
-            {filteredProducts.length} {filteredProducts.length > 1 ? "produits" : "produit"}
+            {filteredProducts.length}{" "}
+            {filteredProducts.length > 1 ? "produits" : "produit"}
           </p>
         </div>
 
@@ -149,7 +164,9 @@ function ShopContent() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <p className="text-brand-lightgray text-lg">Aucun produit ne correspond à cette sélection.</p>
+            <p className="text-brand-lightgray text-lg">
+              Aucun produit ne correspond à cette sélection.
+            </p>
             <button
               onClick={() => {
                 setSelectedCategory("all");

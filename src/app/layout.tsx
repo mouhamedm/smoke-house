@@ -17,10 +17,12 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "Smoke House - L'expérience chicha premium",
-  description: "Découvrez notre collection premium de chichas, saveurs et accessoires. L'art de fumer autrement.",
+  description:
+    "Découvrez notre collection premium de chichas, saveurs et accessoires. L'art de fumer autrement.",
   openGraph: {
     title: "Smoke House - L'expérience chicha premium",
-    description: "Découvrez notre collection premium de chichas, saveurs et accessoires. L'art de fumer autrement.",
+    description:
+      "Découvrez notre collection premium de chichas, saveurs et accessoires. L'art de fumer autrement.",
     siteName: "Smoke House",
   },
 };
@@ -35,9 +37,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-brand-black text-brand-offwhite flex flex-col font-sans">
         <CustomCursor />
         <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
+        <main className="flex-grow">{children}</main>
         <Footer />
       </body>
     </html>

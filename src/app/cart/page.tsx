@@ -58,7 +58,7 @@ export default function CartPage() {
       {/* Hero */}
       <div
         ref={heroRef}
-        className="relative h-[40vh] flex flex-col items-center justify-center text-center px-6 overflow-hidden border-b border-brand-white/10"
+        className="relative h-[40vh] flex flex-col items-center justify-center text-center px-6 pt-20 overflow-hidden border-b border-brand-white/10"
       >
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-[400px] h-[200px] bg-brand-red/6 rounded-full blur-[80px]" />

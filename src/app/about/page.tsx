@@ -50,7 +50,7 @@ export default function AboutPage() {
       >
         {/* Background gradient glow */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[600px] h-[400px] bg-brand-red/10 rounded-full blur-[120px]" />
+          <div className="w-150 h-100 bg-brand-red/10 rounded-full blur-[120px]" />
         </div>
         <span className="relative text-brand-lightgray uppercase tracking-[0.4em] text-xs font-semibold mb-6">
           Notre Histoire
@@ -65,7 +65,7 @@ export default function AboutPage() {
         {/* Scroll indicator */}
         <div className="absolute bottom-12 flex flex-col items-center gap-2">
           <span className="text-brand-lightgray text-xs tracking-widest uppercase">Défiler</span>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-brand-white/50 to-transparent" />
+          <div className="w-px h-12 bg-linear-to-b from-brand-white/50 to-transparent" />
         </div>
       </div>
 
@@ -92,15 +92,11 @@ export default function AboutPage() {
         <section ref={section1Ref} className="flex flex-col md:flex-row gap-16 md:gap-24 items-center mb-32">
           <div className="w-full md:w-1/2 relative aspect-[3/4] overflow-hidden">
             <Image
-              src="/images/products/hookahs/phantom-01.png"
+              src="/images/about/vision.png"
               alt="Notre vision"
               fill
-              className="object-cover grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+              className="object-cover hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-black/60 to-transparent" />
-            <div className="absolute bottom-8 left-8">
-              <span className="text-brand-lightgray text-xs uppercase tracking-widest">— Vision</span>
-            </div>
           </div>
           <div className="w-full md:w-1/2 flex flex-col gap-6">
             <span className="text-brand-lightgray text-xs uppercase tracking-[0.3em] font-semibold">01 / 03</span>
@@ -117,14 +113,13 @@ export default function AboutPage() {
 
         {/* Section 2: Savoir-faire */}
         <section ref={section2Ref} className="flex flex-col md:flex-row-reverse gap-16 md:gap-24 items-center mb-32">
-          <div className="w-full md:w-1/2 relative aspect-square overflow-hidden">
+          <div className="w-full md:w-1/2 relative aspect-[3/4] overflow-hidden">
             <Image
-              src="/images/products/accessories/tongs-01.png"
+              src="/images/about/savoir-faire.png"
               alt="Savoir-faire"
               fill
               className="object-cover hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-brand-black/40 to-transparent" />
           </div>
           <div className="w-full md:w-1/2 flex flex-col gap-6">
             <span className="text-brand-lightgray text-xs uppercase tracking-[0.3em] font-semibold">02 / 03</span>
@@ -143,15 +138,11 @@ export default function AboutPage() {
         <section ref={section3Ref} className="flex flex-col md:flex-row gap-16 md:gap-24 items-center mb-32">
           <div className="w-full md:w-1/2 relative aspect-[3/4] overflow-hidden">
             <Image
-              src="/images/products/flavors/mint-01.png"
+              src="/images/about/experience.png"
               alt="L'expérience"
               fill
               className="object-cover hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-black/60 to-transparent" />
-            <div className="absolute bottom-8 left-8">
-              <span className="text-brand-lightgray text-xs uppercase tracking-widest">— Expérience</span>
-            </div>
           </div>
           <div className="w-full md:w-1/2 flex flex-col gap-6">
             <span className="text-brand-lightgray text-xs uppercase tracking-[0.3em] font-semibold">03 / 03</span>
