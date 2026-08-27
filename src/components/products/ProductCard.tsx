@@ -44,19 +44,23 @@ export function ProductCard({ product }: ProductCardProps) {
         onMouseLeave={handleMouseLeave}
         className="relative aspect-[3/4] w-full bg-brand-charcoal overflow-hidden rounded-sm"
       >
-        {product.images.map((img, idx) => (
-          <Image
-            key={idx}
-            src={img}
-            alt={`${product.name} - Vue ${idx + 1}`}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className={clsx(
-              "object-cover transition-opacity duration-300 ease-in-out",
-              idx === currentImageIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-            )}
-          />
-        ))}
+        {/* Strip de défilement horizontal */}
+        <div 
+          className="absolute inset-0 flex transition-transform duration-500 ease-out"
+          style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+        >
+          {product.images.map((img, idx) => (
+            <div key={idx} className="relative w-full h-full flex-shrink-0">
+              <Image
+                src={img}
+                alt={`${product.name} - Vue ${idx + 1}`}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </div>
 
         {/* Badges */}
         <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
