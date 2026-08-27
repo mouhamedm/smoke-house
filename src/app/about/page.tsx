@@ -25,18 +25,30 @@ export default function AboutPage() {
     // Sections scroll reveal
     [section1Ref, section2Ref, section3Ref].forEach((ref) => {
       if (!ref.current) return;
-      gsap.fromTo(
-        ref.current.children,
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.2,
-          duration: 1.2,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ref.current, start: "top 80%" },
-        }
-      );
+
+      const imageWrapper = ref.current.querySelector(".image-reveal");
+      const textWrapper = ref.current.querySelector(".text-reveal");
+
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: ref.current, start: "top 85%" },
+      });
+
+      if (imageWrapper) {
+        tl.fromTo(
+          imageWrapper,
+          { clipPath: "inset(100% 0 0 0)" },
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 1.6, ease: "power3.out" }
+        );
+      }
+
+      if (textWrapper) {
+        tl.fromTo(
+          textWrapper.children,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.15, duration: 1.2, ease: "power3.out" },
+          "-=1.1",
+        );
+      }
     });
   }, []);
 
@@ -90,7 +102,7 @@ export default function AboutPage() {
 
         {/* Section 1: Notre Vision */}
         <section ref={section1Ref} className="flex flex-col md:flex-row gap-16 md:gap-24 items-center mb-32">
-          <div className="w-full md:w-1/2 relative aspect-[3/4] overflow-hidden">
+          <div className="w-full md:w-1/2 relative aspect-[3/4] overflow-hidden image-reveal">
             <Image
               src="/images/about/vision.png"
               alt="Notre vision"
@@ -98,7 +110,7 @@ export default function AboutPage() {
               className="object-cover hover:scale-105 transition-transform duration-700"
             />
           </div>
-          <div className="w-full md:w-1/2 flex flex-col gap-6">
+          <div className="w-full md:w-1/2 flex flex-col gap-6 text-reveal">
             <span className="text-brand-lightgray text-xs uppercase tracking-[0.3em] font-semibold">01 / 03</span>
             <h2 className="text-3xl md:text-5xl font-serif text-brand-white leading-tight">Notre Vision</h2>
             <div className="w-12 h-[1px] bg-brand-white/30" />
@@ -113,7 +125,7 @@ export default function AboutPage() {
 
         {/* Section 2: Savoir-faire */}
         <section ref={section2Ref} className="flex flex-col md:flex-row-reverse gap-16 md:gap-24 items-center mb-32">
-          <div className="w-full md:w-1/2 relative aspect-[3/4] overflow-hidden">
+          <div className="w-full md:w-1/2 relative aspect-[3/4] overflow-hidden image-reveal">
             <Image
               src="/images/about/savoir-faire.png"
               alt="Savoir-faire"
@@ -121,7 +133,7 @@ export default function AboutPage() {
               className="object-cover hover:scale-105 transition-transform duration-700"
             />
           </div>
-          <div className="w-full md:w-1/2 flex flex-col gap-6">
+          <div className="w-full md:w-1/2 flex flex-col gap-6 text-reveal">
             <span className="text-brand-lightgray text-xs uppercase tracking-[0.3em] font-semibold">02 / 03</span>
             <h2 className="text-3xl md:text-5xl font-serif text-brand-white leading-tight">Savoir-faire<br />& Ingénierie</h2>
             <div className="w-12 h-[1px] bg-brand-white/30" />
@@ -136,7 +148,7 @@ export default function AboutPage() {
 
         {/* Section 3: Expérience */}
         <section ref={section3Ref} className="flex flex-col md:flex-row gap-16 md:gap-24 items-center mb-32">
-          <div className="w-full md:w-1/2 relative aspect-[3/4] overflow-hidden">
+          <div className="w-full md:w-1/2 relative aspect-[3/4] overflow-hidden image-reveal">
             <Image
               src="/images/about/experience.png"
               alt="L'expérience"
@@ -144,7 +156,7 @@ export default function AboutPage() {
               className="object-cover hover:scale-105 transition-transform duration-700"
             />
           </div>
-          <div className="w-full md:w-1/2 flex flex-col gap-6">
+          <div className="w-full md:w-1/2 flex flex-col gap-6 text-reveal">
             <span className="text-brand-lightgray text-xs uppercase tracking-[0.3em] font-semibold">03 / 03</span>
             <h2 className="text-3xl md:text-5xl font-serif text-brand-white leading-tight">Une Expérience<br />Inégalée</h2>
             <div className="w-12 h-[1px] bg-brand-white/30" />

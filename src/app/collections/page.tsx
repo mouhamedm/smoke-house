@@ -23,18 +23,30 @@ export default function CollectionsPage() {
     collections.forEach((_, idx) => {
       const el = document.getElementById(`collection-${idx}`);
       if (!el) return;
-      gsap.fromTo(
-        el.children,
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.15,
-          duration: 1.2,
-          ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 80%" },
-        }
-      );
+
+      const imageWrapper = el.querySelector(".image-reveal");
+      const textWrapper = el.querySelector(".text-reveal");
+
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: el, start: "top 85%" },
+      });
+
+      if (imageWrapper) {
+        tl.fromTo(
+          imageWrapper,
+          { clipPath: "inset(100% 0 0 0)" },
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 1.6, ease: "power3.out" }
+        );
+      }
+
+      if (textWrapper) {
+        tl.fromTo(
+          textWrapper.children,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.15, duration: 1.2, ease: "power3.out" },
+          "-=1.1",
+        );
+      }
     });
   }, []);
 
@@ -69,7 +81,7 @@ export default function CollectionsPage() {
             className={`flex flex-col ${idx % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-12 md:gap-24`}
           >
             {/* Image */}
-            <div className="w-full md:w-3/5 relative aspect-[2/3] overflow-hidden group">
+            <div className="w-full md:w-3/5 relative aspect-[2/3] overflow-hidden group image-reveal">
               <Image
                 src={collection.image}
                 alt={collection.name}
@@ -84,7 +96,7 @@ export default function CollectionsPage() {
             </div>
 
             {/* Text */}
-            <div className="w-full md:w-2/5 flex flex-col items-start gap-6">
+            <div className="w-full md:w-2/5 flex flex-col items-start gap-6 text-reveal">
               <span className="text-brand-lightgray text-xs uppercase tracking-[0.3em] font-semibold">
                 Collection N°0{idx + 1}
               </span>

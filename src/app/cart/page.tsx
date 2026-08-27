@@ -4,23 +4,18 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
-import { products } from "@/data/products";
 import { Minus, Plus, Trash2, ArrowLeft } from "lucide-react";
-
-interface CartItem {
-  product: (typeof products)[0];
-  quantity: number;
-}
+import { useCart } from "@/context/CartContext";
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    { product: products[0], quantity: 1 },
-    { product: products[3], quantity: 2 },
-  ]);
+  const { cartItems, updateQuantity, removeItem, cartSubtotal } = useCart();
+  const [isMounted, setIsMounted] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMounted(true);
     gsap.fromTo(
       heroRef.current?.children || [],
       { y: 40, opacity: 0 },
@@ -33,24 +28,10 @@ export default function CartPage() {
     );
   }, []);
 
-  const updateQuantity = (index: number, delta: number) => {
-    setCartItems((prev) => {
-      const next = [...prev];
-      const newQty = next[index].quantity + delta;
-      if (newQty < 1) return prev;
-      if (newQty > next[index].product.stock) return prev;
-      next[index] = { ...next[index], quantity: newQty };
-      return next;
-    });
-  };
-
-  const removeItem = (index: number) => {
-    setCartItems((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const subtotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   const shipping = cartItems.length > 0 ? 15 : 0;
-  const total = subtotal + shipping;
+  const total = cartSubtotal + shipping;
+
+  if (!isMounted) return <div className="min-h-screen bg-brand-black" />;
 
   return (
     <div className="min-h-screen bg-brand-black">
@@ -178,7 +159,7 @@ export default function CartPage() {
                 <div className="flex flex-col gap-4 text-sm">
                   <div className="flex justify-between text-brand-lightgray">
                     <span>Sous-total ({cartItems.length} article{cartItems.length > 1 ? "s" : ""})</span>
-                    <span className="text-brand-white">{subtotal.toFixed(2)} €</span>
+                    <span className="text-brand-white">{cartSubtotal.toFixed(2)} €</span>
                   </div>
                   <div className="flex justify-between text-brand-lightgray">
                     <span>Livraison express</span>

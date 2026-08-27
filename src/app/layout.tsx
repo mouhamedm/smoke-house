@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { Navbar } from "@/components/navbar/Navbar";
 import { Footer } from "@/components/footer/Footer";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { CartProvider } from "@/context/CartContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -35,10 +36,12 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${inter.variable} ${playfair.variable} dark`}>
       <body className="min-h-screen bg-brand-black text-brand-offwhite flex flex-col font-sans">
-        <CustomCursor />
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <CartProvider>
+          <CustomCursor />
+          <Navbar />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

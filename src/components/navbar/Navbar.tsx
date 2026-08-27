@@ -8,6 +8,7 @@ import gsap from "gsap";
 import { ShoppingBag, Menu, X, Search } from "lucide-react";
 import clsx from "clsx";
 import { products } from "@/data/products";
+import { useCart } from "@/context/CartContext";
 
 const navLinks = [
   { name: "À propos", href: "/about" },
@@ -22,6 +23,7 @@ export function Navbar() {
   const navbarRef = useRef<HTMLElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
+  const { cartCount } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -169,9 +171,11 @@ export function Navbar() {
               className="text-brand-lightgray hover:text-brand-white transition-colors relative group"
             >
               <ShoppingBag className="w-4 h-4" />
-              <span className="absolute -top-2 -right-2 bg-brand-red text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full">
-                0
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-brand-red text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full">
+                  {cartCount}
+                </span>
+              )}
             </Link>
           </nav>
 
@@ -182,6 +186,11 @@ export function Navbar() {
               className="text-brand-lightgray hover:text-brand-white transition-colors relative"
             >
               <ShoppingBag className="w-5 h-5" />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-brand-red text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full">
+                  {cartCount}
+                </span>
+              )}
             </Link>
 
             <button
@@ -201,7 +210,7 @@ export function Navbar() {
       {/* Mobile Menu Overlay */}
       <div
         className={clsx(
-          "fixed inset-0 bg-brand-black z-[60] flex flex-col items-center justify-center gap-8 lg:hidden transition-all duration-500 ease-in-out",
+          "fixed inset-0 bg-brand-black z-40 flex flex-col items-center justify-center gap-8 lg:hidden transition-all duration-500 ease-in-out",
           isMobileMenuOpen
             ? "opacity-100 pointer-events-auto translate-y-0"
             : "opacity-0 pointer-events-none -translate-y-full",

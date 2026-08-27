@@ -9,6 +9,7 @@ import { products } from "@/data/products";
 import { notFound } from "next/navigation";
 import { Minus, Plus, ChevronRight } from "lucide-react";
 import { ProductCard } from "@/components/products/ProductCard";
+import { useCart } from "@/context/CartContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,6 +18,15 @@ export default function ProductPageClient({ slug }: { slug: string }) {
 
   const [currentImage, setCurrentImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [isAdded, setIsAdded] = useState(false);
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    if (!product) return;
+    addToCart(product, quantity);
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
+  };
 
   const heroRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
@@ -259,10 +269,11 @@ export default function ProductPageClient({ slug }: { slug: string }) {
               </div>
 
               <button
-                disabled={product.stock === 0}
-                className="w-full bg-brand-white text-brand-black uppercase tracking-widest text-sm font-semibold py-4 hover:bg-brand-offwhite transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                disabled={product.stock === 0 || isAdded}
+                onClick={handleAddToCart}
+                className="w-full bg-brand-white text-brand-black uppercase tracking-widest text-sm font-semibold py-4 hover:bg-brand-offwhite transition-colors disabled:opacity-80 disabled:cursor-not-allowed"
               >
-                Ajouter au panier
+                {isAdded ? "Ajouté au panier ✓" : "Ajouter au panier"}
               </button>
 
               <button

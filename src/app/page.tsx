@@ -145,7 +145,7 @@ export default function Home() {
             {mainCollection.description}
           </p>
           <Link 
-            href={`/collections/${mainCollection.slug}`}
+            href={`/shop?collection=${mainCollection.slug}`}
             className="px-10 py-4 bg-brand-white text-brand-black text-sm uppercase tracking-widest font-semibold hover:bg-brand-lightgray transition-colors"
           >
             Découvrir la collection
