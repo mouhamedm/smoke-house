@@ -133,7 +133,7 @@ export default function Home() {
             fill
             className="object-cover opacity-40 brand-image-parallax"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/50 to-brand-black" />
+          <div className="absolute inset-0 bg-linear-to-t from-brand-black via-brand-black/50 to-brand-black" />
         </div>
         
         <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center text-center">

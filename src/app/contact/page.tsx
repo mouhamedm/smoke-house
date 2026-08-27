@@ -57,7 +57,7 @@ export default function ContactPage() {
         className="relative h-[50vh] flex flex-col items-center justify-center text-center px-6 overflow-hidden border-b border-brand-white/10"
       >
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[400px] h-[200px] bg-brand-red/8 rounded-full blur-[80px]" />
+          <div className="w-100 h-50 bg-brand-red/8 rounded-full blur-[80px]" />
         </div>
         <span className="relative text-brand-lightgray uppercase tracking-[0.4em] text-xs font-semibold mb-4">
           Restons en contact
@@ -80,11 +80,11 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="w-full h-[1px] bg-brand-white/10" />
+          <div className="w-full h-px bg-brand-white/10" />
 
           {infoItems.map(({ icon: Icon, label, value }) => (
             <div key={label} className="flex items-start gap-4 group">
-              <div className="w-10 h-10 flex items-center justify-center border border-brand-white/20 flex-shrink-0 group-hover:border-brand-white/50 transition-colors">
+              <div className="w-10 h-10 flex items-center justify-center border border-brand-white/20 shrink-0 group-hover:border-brand-white/50 transition-colors">
                 <Icon className="w-4 h-4 text-brand-lightgray group-hover:text-brand-white transition-colors" />
               </div>
               <div className="flex flex-col gap-1">

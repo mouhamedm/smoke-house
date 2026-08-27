@@ -43,7 +43,6 @@ function ShopContent() {
   const heroRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  // Sync state if URL params change
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedCategory(categoryParam);
@@ -66,7 +65,6 @@ function ShopContent() {
     );
   }, []);
 
-  // Animate grid items when filteredProducts change
   useEffect(() => {
     if (!gridRef.current) return;
     const children = Array.from(gridRef.current.children);
@@ -99,7 +97,7 @@ function ShopContent() {
         className="relative h-[45vh] flex flex-col items-center justify-center text-center px-6 pt-28 overflow-hidden border-b border-brand-white/10"
       >
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[500px] h-[200px] bg-brand-red/10 rounded-full blur-[100px]" />
+          <div className="w-125 h-50 bg-brand-red/10 rounded-full blur-[100px]" />
         </div>
         <span className="relative text-brand-lightgray uppercase tracking-[0.4em] text-xs font-semibold mb-4">
           La sélection Smoke House

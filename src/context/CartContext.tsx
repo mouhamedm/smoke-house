@@ -23,7 +23,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isClient, setIsClient] = useState(false);
 
-  // Load cart from localStorage on mount
+  // Load cart
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsClient(true);
@@ -37,7 +37,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // Save cart to localStorage when it changes
+  // Save cart
   useEffect(() => {
     if (isClient) {
       try {
@@ -68,8 +68,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCartItems((prev) => {
       const next = [...prev];
       const newQty = next[index].quantity + delta;
-      if (newQty < 1) return prev; // don't go below 1
-      if (newQty > next[index].product.stock) return prev; // don't exceed stock
+      if (newQty < 1) return prev;
+      if (newQty > next[index].product.stock) return prev; 
       next[index] = { ...next[index], quantity: newQty };
       return next;
     });
@@ -89,8 +89,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
         addToCart,
         updateQuantity,
         removeItem,
-        // When hydrating, we might want to avoid mismatch, but for simplicity we return the client state.
-        // The navbar should handle hydration gracefully.
         cartCount: isClient ? cartCount : 0,
         cartSubtotal: isClient ? cartSubtotal : 0,
       }}

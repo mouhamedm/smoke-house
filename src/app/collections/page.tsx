@@ -59,7 +59,7 @@ export default function CollectionsPage() {
         className="relative h-[70vh] flex flex-col items-center justify-center text-center px-6 overflow-hidden border-b border-brand-white/10"
       >
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[500px] h-[300px] bg-brand-red/10 rounded-full blur-[100px]" />
+          <div className="w-125 h-75 bg-brand-red/10 rounded-full blur-[100px]" />
         </div>
         <span className="relative text-brand-lightgray uppercase tracking-[0.4em] text-xs font-semibold mb-6">
           L'excellence par thème
@@ -81,14 +81,14 @@ export default function CollectionsPage() {
             className={`flex flex-col ${idx % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-12 md:gap-24`}
           >
             {/* Image */}
-            <div className="w-full md:w-3/5 relative aspect-[2/3] overflow-hidden group image-reveal">
+            <div className="w-full md:w-3/5 relative aspect-3/4 overflow-hidden group image-reveal">
               <Image
                 src={collection.image}
                 alt={collection.name}
                 fill
                 className="object-cover transition-transform duration-1000 ease-in-out group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-black/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-brand-black/60 via-transparent to-transparent" />
               {/* Number overlay */}
               <div className="absolute top-8 left-8 text-[80px] md:text-[120px] font-serif text-brand-white/5 leading-none select-none pointer-events-none">
                 0{idx + 1}
@@ -103,7 +103,7 @@ export default function CollectionsPage() {
               <h2 className="text-3xl md:text-4xl font-serif text-brand-white leading-tight">
                 {collection.name}
               </h2>
-              <div className="w-12 h-[1px] bg-brand-white/30" />
+              <div className="w-12 h-px bg-brand-white/30" />
               <p className="text-brand-lightgray text-lg leading-relaxed">
                 {collection.description}
               </p>
@@ -124,7 +124,7 @@ export default function CollectionsPage() {
       {/* Full-width CTA */}
       <div className="relative border-t border-brand-white/10 py-32 overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[800px] h-[200px] bg-brand-red/5 rounded-full blur-[80px]" />
+          <div className="w-200 h-50 bg-brand-red/5 rounded-full blur-[80px]" />
         </div>
         <div className="container mx-auto px-6 md:px-12 flex flex-col items-center text-center gap-8">
           <h2 className="text-3xl md:text-5xl font-serif text-brand-white">

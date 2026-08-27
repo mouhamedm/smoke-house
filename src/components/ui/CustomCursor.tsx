@@ -13,14 +13,12 @@ export function CustomCursor() {
   const isTouch = useRef(false);
 
   useEffect(() => {
-    // Check pointer type — if touch only, hide elements and stop
     isTouch.current = !window.matchMedia("(pointer: fine)").matches;
 
     const dot = cursorDotRef.current;
     const ring = cursorRingRef.current;
     if (!dot || !ring) return;
 
-    // Hide on touch devices via DOM directly (no setState)
     if (isTouch.current) {
       dot.style.display = "none";
       ring.style.display = "none";

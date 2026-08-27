@@ -39,7 +39,7 @@ export default function RootLayout({
         <CartProvider>
           <CustomCursor />
           <Navbar />
-          <main className="flex-grow">{children}</main>
+          <main className="grow">{children}</main>
           <Footer />
         </CartProvider>
       </body>

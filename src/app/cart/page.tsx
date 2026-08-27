@@ -42,7 +42,7 @@ export default function CartPage() {
         className="relative h-[40vh] flex flex-col items-center justify-center text-center px-6 pt-20 overflow-hidden border-b border-brand-white/10"
       >
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[400px] h-[200px] bg-brand-red/6 rounded-full blur-[80px]" />
+          <div className="w-100 h-200 bg-brand-red/6 rounded-full blur-[80px]" />
         </div>
         <span className="relative text-brand-lightgray uppercase tracking-[0.4em] text-xs font-semibold mb-4">
           Récapitulatif
@@ -91,7 +91,7 @@ export default function CartPage() {
                 >
                   {/* Product */}
                   <div className="col-span-1 md:col-span-6 flex gap-5 items-center">
-                    <div className="w-20 h-28 relative bg-brand-charcoal flex-shrink-0 overflow-hidden">
+                    <div className="w-20 h-28 relative bg-brand-charcoal shrink-0 overflow-hidden">
                       <Image src={item.product.images[0]} alt={item.product.name} fill className="object-cover" />
                     </div>
                     <div className="flex flex-col gap-1">

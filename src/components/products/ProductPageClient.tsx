@@ -108,7 +108,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
         {/* Carousel */}
         <div ref={heroRef} className="w-full lg:w-1/2">
           <div
-            className="relative aspect-[4/5] bg-brand-charcoal overflow-hidden select-none"
+            className="relative aspect-4/5 bg-brand-charcoal overflow-hidden select-none"
             onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
             onTouchEnd={(e) => {
               if (touchStartX.current === null) return;
@@ -127,12 +127,11 @@ export default function ProductPageClient({ slug }: { slug: string }) {
               wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 600);
             }}
           >
-            {/* Images stackées en absolute — opacity fade */}
             {product.images.map((img, idx) => (
               <div
                 key={idx}
                 className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                  idx === currentImage ? "opacity-100 z-[1]" : "opacity-0 z-0"
+                  idx === currentImage ? "opacity-100 z-1" : "opacity-0 z-0"
                 }`}
               >
                 <Image

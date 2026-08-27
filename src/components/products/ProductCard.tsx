@@ -20,16 +20,14 @@ export function ProductCard({ product }: ProductCardProps) {
     const { left, width } = cardRef.current.getBoundingClientRect();
     const x = e.clientX - left;
     
-    // Calculate which image to show based on mouse X percentage
     const percent = Math.max(0, Math.min(1, x / width));
     const index = Math.floor(percent * product.images.length);
     
-    // Make sure index is within bounds
     setCurrentImageIndex(Math.min(index, product.images.length - 1));
   };
 
   const handleMouseLeave = () => {
-    setCurrentImageIndex(0); // Reset to first image on leave
+    setCurrentImageIndex(0);
   };
 
   return (
@@ -42,15 +40,15 @@ export function ProductCard({ product }: ProductCardProps) {
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative aspect-[3/4] w-full bg-brand-charcoal overflow-hidden rounded-sm"
+        className="relative aspect-3/4 w-full bg-brand-charcoal overflow-hidden rounded-sm"
       >
-        {/* Strip de défilement horizontal */}
+        {/* Horizontal scrolling strip */}
         <div 
           className="absolute inset-0 flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
         >
           {product.images.map((img, idx) => (
-            <div key={idx} className="relative w-full h-full flex-shrink-0">
+            <div key={idx} className="relative w-full h-full shrink-0">
               <Image
                 src={img}
                 alt={`${product.name} - Vue ${idx + 1}`}
@@ -83,7 +81,7 @@ export function ProductCard({ product }: ProductCardProps) {
               <div 
                 key={idx}
                 className={clsx(
-                  "h-[2px] flex-1 transition-colors duration-300",
+                  "h-0.5 flex-1 transition-colors duration-300",
                   idx === currentImageIndex ? "bg-brand-white" : "bg-brand-white/30"
                 )}
               />

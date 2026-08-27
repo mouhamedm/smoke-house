@@ -63,7 +63,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Focus input when search opens
   useEffect(() => {
     if (isSearchOpen) {
       setTimeout(() => searchInputRef.current?.focus(), 100);
@@ -73,7 +72,6 @@ export function Navbar() {
     }
   }, [isSearchOpen]);
 
-  // Close search on Escape
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsSearchOpen(false);
@@ -82,7 +80,6 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
-  // Close search on route change
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsSearchOpen(false);
@@ -117,7 +114,7 @@ export function Navbar() {
             alt="Smoke House"
             width={90}
             height={90}
-            className="w-[70px] h-[70px] md:w-[90px] md:h-[90px] object-cover rounded-full shadow-xl bg-brand-black"
+            className="w-17.5 h-17.5 md:w-22.5 md:h-22.5 object-cover rounded-full shadow-xl bg-brand-black"
             priority
           />
         </Link>
@@ -144,7 +141,7 @@ export function Navbar() {
                 )}
               >
                 {link.name}
-                <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-brand-white transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-2 left-0 w-0 h-px bg-brand-white transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
           </nav>
@@ -163,7 +160,7 @@ export function Navbar() {
                 )}
               >
                 {link.name}
-                <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-brand-white transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-2 left-0 w-0 h-px bg-brand-white transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
             <Link
@@ -195,7 +192,7 @@ export function Navbar() {
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-brand-white z-[70] relative"
+              className="text-brand-white z-70 relative"
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -231,7 +228,7 @@ export function Navbar() {
       {/* Search Overlay */}
       <div
         className={clsx(
-          "fixed inset-0 z-[80] transition-all duration-400 ease-in-out",
+          "fixed inset-0 z-80 transition-all duration-400 ease-in-out",
           isSearchOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none",
@@ -252,7 +249,7 @@ export function Navbar() {
         >
           {/* Input */}
           <div className="flex items-center border-b border-brand-white/40 pb-4 gap-4">
-            <Search className="w-5 h-5 text-brand-lightgray flex-shrink-0" />
+            <Search className="w-5 h-5 text-brand-lightgray shrink-0" />
             <input
               ref={searchInputRef}
               type="text"
@@ -283,7 +280,7 @@ export function Navbar() {
                     onClick={() => setIsSearchOpen(false)}
                     className="flex items-center gap-4 p-3 hover:bg-brand-white/5 transition-colors rounded-sm group"
                   >
-                    <div className="relative w-12 h-12 flex-shrink-0 overflow-hidden bg-brand-charcoal">
+                    <div className="relative w-12 h-12 shrink-0 overflow-hidden bg-brand-charcoal">
                       <Image
                         src={p.images[0]}
                         alt={p.name}
@@ -299,7 +296,7 @@ export function Navbar() {
                         {p.category}
                       </p>
                     </div>
-                    <span className="text-brand-white text-sm font-medium flex-shrink-0">
+                    <span className="text-brand-white text-sm font-medium shrink-0">
                       {p.price.toFixed(2)} €
                     </span>
                   </Link>
