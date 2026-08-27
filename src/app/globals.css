@@ -32,7 +32,12 @@ body {
 }
 
 @media (pointer: fine) {
-  body, a, button, input, textarea, select {
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select {
     cursor: none !important;
   }
 }

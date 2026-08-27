@@ -110,7 +110,8 @@ export const products: Product[] = [
       brand: "Porsche Design",
       materials: "Finitions noires ou argentées, vase fumé"
     },
-    featured: false
+    featured: false,
+    collection: "the-black-collection"
   },
   {
     id: "marble-hookah-collection",
@@ -129,7 +130,8 @@ export const products: Product[] = [
     specifications: {
       materials: "Bois, métal et verre selon le modèle"
     },
-    featured: false
+    featured: false,
+    collection: "the-signature-collection"
   },
   {
     id: "seven-hookah-bowl",
@@ -151,7 +153,8 @@ export const products: Product[] = [
       brand: "Seven Hookah",
       materials: "Céramique"
     },
-    featured: false
+    featured: false,
+    collection: "the-night-collection"
   },
   {
     id: "cosmobowl-a-shot",
@@ -171,7 +174,8 @@ export const products: Product[] = [
       brand: "Cosmobowl",
       materials: "Céramique texturée"
     },
-    featured: false
+    featured: false,
+    collection: "the-black-collection"
   },
   {
     id: "al-fakher-mint",
@@ -232,7 +236,8 @@ export const products: Product[] = [
       dimensions: "Cubes de 25 mm",
       weight: "1 kg"
     },
-    featured: false
+    featured: false,
+    collection: "the-black-collection"
   },
   {
     id: "premium-cubes-27",
